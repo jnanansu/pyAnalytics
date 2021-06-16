@@ -186,7 +186,7 @@ np3 = np.array([[1,4],[3,1],[5,6],[10,50]])
 np3
 np3.shape
 
-np3.reshape((-1,1))  #1 column from 2 column
+np3.reshape((-1,2))  #1 column from 2 column
 
 #http://cs231n.github.io/python-numpy-tutorial/
 #%% #pandas - dataframe, excel like
