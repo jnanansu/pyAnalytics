@@ -185,7 +185,7 @@ dir(np)
 np3 = np.array([[1,4],[3,1],[5,6],[10,50]])
 np3
 np3.shape
-
+np3.reshape((-1,1))
 np3.reshape((-1,2))  #1 column from 2 column
 
 #http://cs231n.github.io/python-numpy-tutorial/
@@ -207,8 +207,10 @@ df1.describe() #description of numerical values
 df1.dtypes #data types
 df1.shape  # rows and columns
 df1.groupby('gender').size()
+df1.groupby('gender').count()
 df1.groupby('gender')['marks'].mean()
 df1.groupby('gender').aggregate({'marks': [np.mean, 'max','min','std','count']})
+df1.groupby('gender').aggregate({'marks': ['mean', 'max','min','std','count']})
 
 #%% #Graphs https://python-graph-gallery.com/
 #https://matplotlib.org/
@@ -216,8 +218,10 @@ df1.groupby('gender').aggregate({'marks': [np.mean, 'max','min','std','count']})
 import matplotlib.pyplot as plt
 df1.groupby('gender').size()
 df1.groupby('gender').size().plot(kind='bar')
+df1.groupby('gender').aggregate({'marks':['mean']}).plot(kind='bar')
 
 plt.hist(df1['marks'])
+plt.hist(df1['gender'])
 
 #https://seaborn.pydata.org/index.html
 import seaborn as sns
@@ -240,6 +244,7 @@ data('mtcars')
 #https://vincentarelbundock.github.io/Rdatasets/datasets.html
 import statsmodels.api as sm
 mtcars = sm.datasets.get_rdataset(dataname='mtcars', package= 'datasets')
+mtcars.data
 mtcars.data.head()
 
 
