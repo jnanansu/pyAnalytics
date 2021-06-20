@@ -36,7 +36,7 @@ mtcars.values
 
 #%%% access DF
 mtcarsDF[0:5]
-mtcarsDF[0:5,0:3]
+mtcarsDF[0:5, 0:3]
 
 #single value: at
 mtcarsDF.at['Mazda RX4', 'mpg']
@@ -73,6 +73,7 @@ mtcarsDF.iloc[:5, :3]  #0-4 rows, 0-3 columns
 mtcarsDF.iloc[::2]  #alternate rows : start, end, step
 mtcarsDF.iloc[::-1]  #reverse order
 mtcarsDF.iloc[::2].iloc[::2] #first alternate, again alternate
+mtcarsDF.iloc[::4] # same as above
 mtcarsDF.iloc[:-2:-2]  #which rows is this
 mtcarsDF.iloc[1::5,:]  #5th row start from 1(2nd row)
 mtcarsDF.iloc[0:3]
@@ -81,6 +82,7 @@ mtcarsDF.iloc[0:3]
 #filter
 mtcarsDF.filter(['gear', 'am'])
 mtcarsDF.filter(regex = '[gGa]')  #small or big G or a in the column name
+mtcarsDF.filter(regex = '[gG]')
 
 mtcarsDF.filter(items=['gear','am'])
 mtcarsDF.filter(regex='Toyota', axis=0)  #rownames axis=0
@@ -103,12 +105,12 @@ mtcarsDF.skew(axis=1)
 #condition
 mtcarsDF['gear'] == 3  #T&F
 mtcars[mtcarsDF['gear'] == 3]  #rows with T for gear=3
-mtcars[mtcarsDF['gear'] != 3, ['gear','am']]
+mtcars[mtcarsDF[['gear'] != 3],['gear','am']] #error
 
 #another way
 mtcarsDF[mtcarsDF.gear.eq(3)]  #chaining method
 
-mtcarsDF[mtcarsDF['gear'] == 3 & mtcarsDF['am']== 0]
+mtcarsDF[mtcarsDF['gear'] == 3 & mtcarsDF['am']== 0] #error
 
 mtcarsDF.gear.unique()
 mtcarsDF.carb.unique()
@@ -153,6 +155,7 @@ mtcarsDF.describe()  # default only numeric
 #%% sort
 mtcarsDF.sort_values(by='gear', axis=0)
 mtcarsDF.sort_values(by=['gear', 'mpg']).head(n=10)
+mtcarsDF.sort_values(by=['gear', 'mpg'])
 mtcarsDF.sort_values(by=['cyl','mpg'], ascending=[True, False]).head(n=20)
 
 
@@ -162,6 +165,7 @@ mtcarsDF.sort_values(by=['cyl','mpg'], ascending=[True, False]).head(n=20)
 mtcarsDF.describe()
 mtcarsDF.groupby('gear')
 mtcarsDF.groupby(['gear'])
+mtcarsDF.groupby(mtcarsDF['gear'])
 mtcarsDF.groupby(['gear']).groups.keys()
 mtcarsDF.groupby(['gear']).groups[3] #cars of group with gear 3
 mtcarsDF.groupby('carb').first()  #first item of each group
@@ -185,12 +189,12 @@ mtcarsDF.groupby('gear')['mpg','wt'].agg('mean')
 mtcarsDF.groupby('gear')['mpg','wt'].agg(['mean','max'])
 mtcarsDF.groupby('gear').agg([np.mean, np.sum])  #all columns, np is faster, numeric values
 mtcarsDF.groupby('gear')['mpg','wt'].agg([np.mean, np.sum, 'count'])
-mtcarsDF.groupby('gear')['mpg'].agg([np.mean, np.sum, 'count']).rename(columns={'meanMPG')
+mtcarsDF.groupby('gear')['mpg'].agg([np.mean, np.sum, 'count']).rename(columns={'mean':'meanMPG'})
 
 
 
 mtcarsDF.groupby('gear').agg(meanMPG = pd.NamedAgg(column='mpg', aggfunc='mean'))
-mtcarsDF.groupby(['gear','am']).agg(meanMPG = pd.NamedAgg(column='mpg', aggfunc='max'))
+mtcarsDF.groupby(['gear','am']).agg(maxMPG = pd.NamedAgg(column='mpg', aggfunc='max'))
 mtcarsDF.groupby('gear').agg(meanMPG = pd.NamedAgg(column='mpg', aggfunc='mean'), maxMPG = pd.NamedAgg(column='wt', aggfunc='max'))
 mtcarsDF['gear'].count()
 mtcarsDF['gear'].max()
@@ -201,6 +205,7 @@ mtcarsDF.groupby('gear').mean().add_prefix('MEAN_')
 gearGp = mtcarsDF.groupby('gear')
 gearGp.mean()
 gearGp.nth(1)  #nth row in each gp
+gearGp.nth(0)
 gearGp.nth([1,3])  # 1st and 3rd row in each gp
 gearGp.first() #1st row in each gp
 gearGp.last() #last row in each gp
