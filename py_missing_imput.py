@@ -11,6 +11,7 @@ sleep1 = pd.read_csv('sleep.csv')
 sleep1.head()
 sleep2 = pd.read_csv('https://raw.githubusercontent.com/dupadhyaya/sipPython/master/data/sleep.csv')
 sleep2
+sleep2.shape
 sleep = sleep2.copy()
 
 #select to drop the rows only if all of the values in the row are missing.
@@ -23,8 +24,9 @@ sleep.head()
 sleep.dropna(axis=1,inplace=False).head()                
 sleep.dropna(axis=0,inplace=False).head()                
 sleep.shape
-#keep only the rows with at least 4 non-na values:
+#keep only the rows with at least 9 non-na values:
 sleep.dropna(thresh=9, axis=0, inplace=False).shape
+# thresh reprent atleast 9 number of non -NA values in the row
 sleep.dropna(thresh=55, axis=1, inplace=False).shape
 s1= np.int(.6 * len(sleep)) ; s1
 #t1=55
