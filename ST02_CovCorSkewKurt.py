@@ -74,10 +74,18 @@ plt.tight_layout()
 
 
 #find skewness and kurtosis of mtcars columns
+from pydataset import data
+mtcars = data('mtcars')
 mtcars
 skew(mtcars.mpg)
 plt.hist(mtcars.mpg, bins=10)
 kurtosis(mtcars.mpg)
+
+skew(mtcars.hp)
+mtcars.hp.skew() # different result
+plt.hist(mtcars.hp, bins=10)
+kurtosis(mtcars.hp)
+mtcars.hp.kurtosis() # different result
 
 #find columns normal distributed, skewed and kurtosis
 mtcars.columns
