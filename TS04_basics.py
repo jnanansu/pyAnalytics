@@ -26,7 +26,7 @@ sales - sales.shift(1)  #daily changes
 #see the syntax #restart session
 #https://pypi.org/project/pmdarima/
 from pmdarima.utils import c, diff
-diff(sales, lag=1, differences=1) #diff from function
+diff(sales, lag=1, differences=1) #diff from function , lag = shift
 sales - sales.shift(1)  #same
 #%%%%%
 diff(sales, lag=2, differences=1)
@@ -35,6 +35,7 @@ sales - sales.shift(2)
 #lag is the gap : 1 with 3, 2 with 4 and so on
 #%%%%%
 sales2 = sales.copy()
+sales2
 diff(sales, lag=1, differences=1)
 sales2 - sales2.shift(1)
 

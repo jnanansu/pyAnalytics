@@ -18,12 +18,12 @@ type(start1)
 print(start1)
 end1 = datetime.datetime(2021, 6, 26)
 key2= 'piSAZyX3x1SBtQWXHRwk'
-key = '4D8hkYAV4WEkcTmD9LMW'
+#key = '4D8hkYAV4WEkcTmD9LMW'
 #S_sbi = "BSE/BOM500112" # SBI
-S_sbi = 'BSE/BOM500116'
+S_sbi = 'BSE/BOM500116' #IDBI bank
+
 #Fetch Data
 sbi= quandl.get(dataset=S_sbi, authtoken=key2, start_date=start1, end_date=end1)
-pd.set_option(rows = 12)
 
 pd.set_option('display.max_columns', None)
 pd.set_option('display.expand_frame_repr', False)
@@ -32,6 +32,7 @@ pd.set_option('max_colwidth', -1)
 sbi.head(1)
 sbi.tail()
 #Analyse
+import matplotlib.pyplot as plt
 sbi.Close.plot()
 plt.show();
 
@@ -46,7 +47,7 @@ data[['Open','High','Low','Close','WAP']].plot()
 data[['Open','Close']].plot()
 #%%%
 #Libraries
-pip install --upgrade mpl_finance
+#pip install --upgrade mpl_finance
 from mpl_finance import candlestick_ohlc
 import matplotlib.dates as mdates
 import matplotlib.pyplot as plt

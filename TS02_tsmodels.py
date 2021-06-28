@@ -13,7 +13,6 @@ import seaborn as sns
 sns.set(style='darkgrid', context='talk', palette='Dark2')
 
 my_year_month_fmt = mdates.DateFormatter('%m/%y')
-
 #%%%%
 help(pd.date_range)
 dates = pd.date_range('2020-09-01',periods=30, freq='B')
