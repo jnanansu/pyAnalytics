@@ -38,14 +38,17 @@ print(len(association_results))
 
 
 #mlextend
+#pip install mlxtend
 from mlxtend.preprocessing import TransactionEncoder
 from mlxtend.frequent_patterns import apriori
 from mlxtend.frequent_patterns import association_rules
+support_threshold =.01
 frequent_itemsets = apriori(teams, min_support= support_threshold, use_colnames = True)
 teams
 #convert transactions to df
+import pandas as pd
 te = TransactionEncoder()
-te_ary = te.fit(transactions).transform(teams)
+te_ary = te.fit(teams).transform(teams)
 te_ary
 te.columns_
 dfTeams = pd.DataFrame(te_ary, columns=te.columns_)
