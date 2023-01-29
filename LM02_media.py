@@ -72,6 +72,7 @@ sns.barplot(data = media, x='weekend', y='Views_show')
 #Ad impressions
 ax = media.plot(x='Date', y='Views_show', legend=False)
 ax2 = ax.twinx()
+
 media.plot(x='Date', y='Ad_impression', ax=ax2, legend=False, color='r')
 ax.figure.legend()
 plt.show()
